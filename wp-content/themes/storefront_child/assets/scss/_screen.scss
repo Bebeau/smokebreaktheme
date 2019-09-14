@@ -1,0 +1,196 @@
+$facebook: #3b5998;
+$twitter: #00aced;
+$pinterest: #C92228;
+$instagram: #125688;
+
+input {
+	&:focus {
+		outline: none;
+	}
+}
+.home {
+	.woocommerce-products-header,
+	.page-title {
+		display: none;
+	}
+}
+.site-branding {
+	width: 100% !important;
+	float: none;
+}
+.page-title {
+	text-align: center;
+}
+.site-description,
+.site-branding,
+.site-search,
+.storefront-sorting {
+	display: none !important;
+}
+.site-header {
+	height: 75px;
+}
+.site-title {
+	font-size: 0;
+	text-indent: -99999px;
+	overflow: hidden;
+	width: 100%;
+	height: 400px;
+	display: none;
+}
+.site-header {
+	margin-bottom: 0 !important;
+	background-color: white !important;
+}
+.social-share {
+	display: block;
+	bottom: 0;
+	font-size: 18pt;
+	z-index: 99;
+	color: #ebebeb;
+	text-align: left;
+	margin: 25px 0;
+	a {
+		text-align: center;
+	}
+	.share-text {
+		margin: 10px 0;
+		font-size: 18pt;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+	i {
+		font-size: 18pt;
+		color: white;
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+		margin: 0 2px;
+		border-radius: 50%;
+		&.fa-facebook {
+			background: $facebook;
+		}
+		&.fa-twitter {
+			background: $twitter;
+		}
+		&.fa-pinterest {
+			background: $pinterest;
+		}
+		&.fa-instagram {
+			background: $instagram;
+		}
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+#pillows {
+	box-sizing: border-box;
+	a {
+		width: 50%;
+		text-align: center;
+		display: inline-block; 
+		box-sizing: border-box;
+		padding: 25px;
+		&:last-child {
+			margin: 0 0 0 -4px;
+		}
+	}
+}
+#itemlisting {
+	a {
+		width: 33.33333%;
+		text-align: center;
+		display: inline-block; 
+		box-sizing: border-box;
+		padding: 25px;
+		margin: 0 0 0 -4px;
+		&:first-child {
+			margin: 0;
+		}
+	}
+}
+.price {
+	.amount {
+		color: #6ba04d;
+	}
+}
+.listprice {
+	text-align: center;
+	color: #6ba04d;
+	.regular {
+		&.sale {
+			color: #ccc;
+			text-decoration: line-through;
+		}
+	}
+	.sale {
+		color: #6ba04d;
+		margin-left: 10px;
+	}
+}
+#about {
+	h1 {
+		text-align: center;
+	}
+	.text {
+		font-size: 18pt;
+		width: 600px;
+		margin: 0 auto;
+		p {
+			margin: 50px 0;
+		}
+	}
+	.signature {
+		margin: 0 auto;
+		display: block;
+		max-width: 150px;
+		transform: translate(200px,0);
+	}
+}
+#wholesalefrm,
+#influencefrm {
+	width: 300px;
+	margin: 50px auto;
+	.input {
+		margin: 5px 0;
+		label {
+			display: block;
+			font-size: 10pt;
+			text-transform: uppercase;
+			span {
+				color: red;
+			}
+		}
+		input, select {
+			display: block;
+			width: 100%;
+		}
+	}
+	button {
+		margin: 15px auto 0;
+		display: block;
+		background: #333333;
+		color: white;
+	}
+}
+footer {
+	text-align: center;
+	background: url('assets/img/bg_pattern.jpg') repeat scroll top left;
+	margin: 50px 0 0;
+	padding: 50px;
+	box-sizing: border-box;
+	border-top: 1px solid #ebebeb;
+	text-align: center;
+	.social-share {
+		text-align: center;
+	}
+	.logo {
+		width: 150px;
+		height: auto;
+	}
+	img {
+		display: block;
+		margin: 0 auto;
+	}
+}
