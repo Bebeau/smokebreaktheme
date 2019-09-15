@@ -15,9 +15,7 @@ function enqueue_child_theme_styles() {
     wp_enqueue_script('fontawesome', 'https://use.fontawesome.com/771a83773c.js', array('jquery'), null, true);
 	wp_enqueue_script('custom', get_stylesheet_directory_uri() . '/assets/js/custom-min.js', array('jquery'), null, true);
     wp_localize_script( 'custom', 'ajax', array(
-        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-        'wholesale' => wp_create_nonce('wholesale'),
-        'influence' => wp_create_nonce('influence')
+        'ajaxurl' => admin_url( 'admin-ajax.php' )
     ));
 }
 // Change number of products that are displayed per page (shop page)
@@ -117,26 +115,23 @@ add_action('wp_ajax_nopriv_sendWholesale', 'wholesaleSubmit');
 function wholesaleSubmit() {
     global $post;
 
-	check_ajax_referer( $_POST['wholesaleNonce'], 'wholesale' );
-
     $success = false;
 
     $company = isset( $_POST['company'] ) ? $_POST['company'] : "";
-    $name = isset( $_POST['name'] ) ? $_POST['name'] : "";
+    $client = isset( $_POST['client'] ) ? $_POST['client'] : "";
     $phone = isset( $_POST['phone'] ) ? $_POST['phone'] : "";
     $emailaddress = filter_var($_POST['emailaddress'], FILTER_SANITIZE_EMAIL);
     $service = isset( $_POST['service'] ) ? $_POST['service'] : "";
     $qty = isset( $_POST['qty'] ) ? $_POST['qty'] : "";
 
     $email = esc_attr(get_option('admin_email'));
-    $to = $emailaddress;
 
-    if ( $company && $name && $phone && $emailaddress && $service && $qty ) {
+    if ( $company && $client && $phone && $emailaddress && $service && $qty ) {
 
         $subject = "Smoke Break Wholesale Inquiry";
 
         $headers = 'From:' . $email . "\r\n";
-        $headers .= 'Reply-To:' . $to . "\r\n";
+        $headers .= 'Reply-To:' . $emailaddress . "\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html\r\n";
         $headers .= "charset: ISO-8859-1\r\n";
@@ -144,12 +139,12 @@ function wholesaleSubmit() {
 
         $formcontent = '<html><body><center>';
             $formcontent .= '<table rules="all" style="border: 1px solid #cccccc; width: 600px;" cellpadding="10">';
-            $formcontent .= "<tr><td><strong>Name:</strong></td><td>".$company."</td></tr>";
-            $formcontent .= "<tr><td><strong>Email:</strong></td><td>".$name."</td></tr>";
-            $formcontent .= "<tr><td><strong>Message:</strong></td><td>".$phone."</td></tr>";
-            $formcontent .= "<tr><td><strong>Message:</strong></td><td>".$emailaddress."</td></tr>";
-            $formcontent .= "<tr><td><strong>Message:</strong></td><td>".$service."</td></tr>";
-            $formcontent .= "<tr><td><strong>Message:</strong></td><td>".$qty."</td></tr>";
+            $formcontent .= "<tr><td><strong>Company:</strong></td><td>".$company."</td></tr>";
+            $formcontent .= "<tr><td><strong>Name:</strong></td><td>".$client."</td></tr>";
+            $formcontent .= "<tr><td><strong>Phone:</strong></td><td>".$phone."</td></tr>";
+            $formcontent .= "<tr><td><strong>Email:</strong></td><td>".$emailaddress."</td></tr>";
+            $formcontent .= "<tr><td><strong>Service:</strong></td><td>".$service."</td></tr>";
+            $formcontent .= "<tr><td><strong>Quantity:</strong></td><td>".$qty."</td></tr>";
         $formcontent .= '</table></center></body></html>';
 
         $success = mail( $email, $subject, $formcontent, $headers );
@@ -170,26 +165,24 @@ add_action('wp_ajax_nopriv_sendInfluence', 'influenceSubmit');
 function influenceSubmit() {
     global $post;
 
-	check_ajax_referer( $_POST['influenceNonce'], 'influence' );
-
     $success = false;
 
-    $company = isset( $_POST['company'] ) ? $_POST['company'] : "";
-    $name = isset( $_POST['name'] ) ? $_POST['name'] : "";
-    $phone = isset( $_POST['phone'] ) ? $_POST['phone'] : "";
+    $handle = isset( $_POST['handle'] ) ? $_POST['handle'] : "";
     $emailaddress = filter_var($_POST['emailaddress'], FILTER_SANITIZE_EMAIL);
-    $service = isset( $_POST['service'] ) ? $_POST['service'] : "";
-    $qty = isset( $_POST['qty'] ) ? $_POST['qty'] : "";
+    $address = isset( $_POST['address'] ) ? $_POST['address'] : "";
+    $address2 = isset( $_POST['address2'] ) ? $_POST['address2'] : "";
+    $city = isset( $_POST['city'] ) ? $_POST['city'] : "";
+    $state = isset( $_POST['state'] ) ? $_POST['state'] : "";
+    $zip = isset( $_POST['zip'] ) ? $_POST['zip'] : "";
 
     $email = esc_attr(get_option('admin_email'));
-    $to = $emailaddress;
 
-    if ( $company && $name && $phone && $emailaddress && $service && $qty ) {
+    if ( $handle && $address && $address2 && $city && $state && $zip ) {
 
-        $subject = "Smoke Break Wholesale Inquiry";
+        $subject = "Smoke Break Influencer Inquiry";
 
         $headers = 'From:' . $email . "\r\n";
-        $headers .= 'Reply-To:' . $to . "\r\n";
+        $headers .= 'Reply-To:' . $emailaddress . "\r\n";
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/html\r\n";
         $headers .= "charset: ISO-8859-1\r\n";
@@ -197,12 +190,8 @@ function influenceSubmit() {
 
         $formcontent = '<html><body><center>';
             $formcontent .= '<table rules="all" style="border: 1px solid #cccccc; width: 600px;" cellpadding="10">';
-            $formcontent .= "<tr><td><strong>Name:</strong></td><td>".$company."</td></tr>";
-            $formcontent .= "<tr><td><strong>Email:</strong></td><td>".$name."</td></tr>";
-            $formcontent .= "<tr><td><strong>Message:</strong></td><td>".$phone."</td></tr>";
-            $formcontent .= "<tr><td><strong>Message:</strong></td><td>".$emailaddress."</td></tr>";
-            $formcontent .= "<tr><td><strong>Message:</strong></td><td>".$service."</td></tr>";
-            $formcontent .= "<tr><td><strong>Message:</strong></td><td>".$qty."</td></tr>";
+            $formcontent .= "<tr><td><strong>Handle:</strong></td><td>".$handle."</td></tr>";
+            $formcontent .= "<tr><td><strong>Address:</strong></td><td>".$address.'<br />'.$address2.'<br />'.$city.','.$state.' '.$zip."</td></tr>";
         $formcontent .= '</table></center></body></html>';
 
         $success = mail( $email, $subject, $formcontent, $headers );
