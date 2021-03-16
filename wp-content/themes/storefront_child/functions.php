@@ -18,6 +18,49 @@ function enqueue_child_theme_styles() {
         'ajaxurl' => admin_url( 'admin-ajax.php' )
     ));
 }
+
+// Add woocommerce theme support
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+}
+
+// Replace single product template with custom layout
+// add_filter( 'template_include', 'custom_product_template', 10 );
+// function custom_product_template( $template ) {
+//     $productID = wc_get_product()->get_id();
+//     if ( is_product() && $productID === 444 ) {
+//         $template = get_stylesheet_directory() . '/single-ogkushpillow.php';
+//     }
+//     return $template;
+// }
+
+// Helper function to load a WooCommerce template or template part file from the
+// active theme or a plugin folder.
+function my_load_wc_template_file( $template_name ) {
+    // Check theme folder first - e.g. wp-content/themes/my-theme/woocommerce.
+    $productID = wc_get_product()->get_id();
+    $template_name = 'single-'.$productID.'.php';
+    $file = get_stylesheet_directory() . '/woocommerce/templates/' . $template_name;
+    if ( @file_exists( $file ) ) {
+        return $file;
+    }
+}
+add_filter( 'woocommerce_template_loader_files', function( $templates, $template_name ){
+    // Capture/cache the $template_name which is a file name like single-product.php
+    wp_cache_set( 'my_wc_main_template', $template_name ); // cache the template name
+    return $templates;
+}, 10, 2 );
+add_filter( 'template_include', function( $template ){
+    if ( $template_name = wp_cache_get( 'my_wc_main_template' ) ) {
+        wp_cache_delete( 'my_wc_main_template' ); // delete the cache
+        if ( $file = my_load_wc_template_file( $template_name ) ) {
+            return $file;
+        }
+    }
+    return $template;
+}, 11 );
+
 // Change number of products that are displayed per page (shop page)
 add_filter( 'loop_shop_per_page', 'product_listing_count', 20 );
 function product_listing_count( $cols ) {
@@ -32,11 +75,6 @@ if (!function_exists('loop_columns')) {
 	function loop_columns() {
 		return 3; // 3 products per row
 	}
-}
-// Add woocommerce theme support
-add_action( 'after_setup_theme', 'woocommerce_support' );
-function woocommerce_support() {
-    add_theme_support( 'woocommerce' );
 }
 // Remove additional information product tab
 add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
@@ -90,25 +128,179 @@ function remove_shipping_phone_field($fields) {
     return $fields;
 }
 
-// Add analytic script to checkout
-function smokebreak_checkout_analytics( $order_id ) {
-	$order = new WC_Order( $order_id );
-	$currency = $order->get_order_currency();
-	$total = $order->get_total();
-	$date = $order->order_date;
-	?>
-	<!-- Event snippet for OG Kushion Purchase conversion page -->
-	<script>
-	  gtag('event', 'conversion', {
-	      'send_to': 'AW-1040152560/mEU6COyDn6EBEPDv_e8D',
-	      'transaction_id': <?php echo $order_id; ?>,
-	      'value': <?php echo $total; ?>,
-	      'currency': 'USD'
-	  });
-	</script>
-	<?php	
+
+// HEAD Script (Initializing)
+add_action( 'wp_head', 'fbpixels_head_script' );
+function fbpixels_head_script() {
+    ?>
+    <!-- bing -->
+    <script>
+        (function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"26060070"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");
+    </script>
+    <!-- Global site tag (gtag.js) - Google Ads: 1040152560 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1040152560"></script>
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KZ2CVCH');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-1040152560');
+    </script>
+    <!-- facebook -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    </script>
+    <!-- tiktok -->
+    <script>
+      (function() {
+        var ta = document.createElement('script'); ta.type = 'text/javascript'; ta.async = true;
+        ta.src = 'https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid=BTB4S2B0ONP9VR5G7KO0';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ta, s);
+      })();
+    </script>
+    <?php
 }
-add_action( 'woocommerce_thankyou', 'smokebreak_checkout_analytics' );
+
+// Function that gets the Ajax data
+add_action( 'wp_ajax_product_added_to_cart', 'wc_product_added_to_cart' );
+add_action( 'wp_ajax_nopriv_product_added_to_cart', 'wc_product_added_to_cart' );
+function wc_product_added_to_cart() {
+    if ( isset($_POST['pid']) ){
+        // Get an instance of the WCW_Product Object
+        $product = wc_get_product( $_POST['pid'] );
+
+        // Return the product price including taxes
+        echo number_format( wc_get_price_including_tax( $product ), 2 );
+
+        // OR =>the product price EXCLUDING taxes
+        // echo number_format( wc_get_price_excluding_tax( $product ), 2 );
+    }
+    die(); // Alway at the end (to avoid server error 500)
+}
+// FB PiXELS Footer script Events
+add_action( 'wp_footer', 'fbpixels_add_to_cart_script' );
+function fbpixels_add_to_cart_script(){
+    // HERE set your init reference
+    $init_id = '316382706407707';
+
+    // HERE set the product currency code
+    $currency = 'USD';
+
+    ## 0. Common script -  On ALL Pages
+    ?>
+    <script>
+        fbq('init', <?php echo $init_id; ?>);
+        fbq('track', 'PageView');
+    <?php
+
+    ## 1. On Checkout page
+    if ( ! is_wc_endpoint_url( 'order-received' ) && is_checkout() ) {
+        ?>
+        fbq('track', 'InitiateCheckout');
+        <?php
+
+    ## 2. On Order received (thankyou)
+    } elseif ( is_wc_endpoint_url( 'order-received' ) ) {
+        global $wp;
+        // Get the Order ID from Query vars
+        $order_id  = absint( $wp->query_vars['order-received'] );
+
+        if ( $order_id > 0 ){
+            // Get an instance of the WC_Order object
+            $order = wc_get_order( $order_id );
+            ?>
+            fbq('track', 'Purchase', {
+                value:    <?php echo $order->get_total(); ?>,
+                currency: '<?php echo $order->get_order_currency(); ?>',
+            });
+            gtag('event', 'conversion', {
+                'send_to': 'AW-1040152560/TXJICIbJhtsBEPDv_e8D',
+                'transaction_id': <?php echo $order_id; ?>,
+                'value': <?php echo $order->get_total(); ?>,
+                'currency': 'USD'
+            });
+        <?php
+        }
+    ## 3. Other pages - (EXCEPT Order received and Checkout)
+    } else {
+
+    ?>
+    jQuery(function($){
+        if (typeof woocommerce_params === 'undefined')
+            return false;
+
+        var price;
+        jQuery('body').on( 'adding_to_cart', function(a,b,d){
+            var sku = d.product_sku, // product Sku
+                pid = d.product_id,  // product ID
+                qty = d.quantity;    // Quantity
+
+            jQuery.ajax({
+                url: woocommerce_params.ajax_url,
+                type: 'POST',
+                data: {
+                    'action' : 'product_added_to_cart',
+                    'sku'    : sku,
+                    'pid'    : pid,
+                    'qty'    : qty
+                },
+                success: function(result) {
+                    // The FB Pixels script for AddToCart
+                    if( result > 0 ){
+                        fbq('track', 'AddToCart', {
+                            value:    result,
+                            currency: '<?php echo $currency; ?>',
+                        });
+                        console.log(result);
+                    }
+                }
+            });
+        });
+    });
+    <?php
+    }
+    ## For single product pages - Normal add to cart
+    if( is_product() && isset($_POST['add-to-cart']) ){
+        global $product;
+
+        // variable product
+        if( $product->is_type('variable') && isset($_POST['variation_id']) ) {
+            $product_id = $_POST['variation_id'];
+            $price = number_format( wc_get_price_including_tax( wc_get_product($_POST['variation_id']) ), 2 );
+        }
+        // Simple product
+        elseif ( $product->is_type('simple') ) {
+            $product_id = $product->get_id();
+            $price = number_format( wc_get_price_including_tax( $product ), 2 );
+        }
+        $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
+
+        ?>
+        fbq('track', 'AddToCart', {
+            value:    <?php echo $price; ?>,
+            currency: '<?php echo $currency; ?>',
+        });
+        <?php
+    }
+    ?>
+    </script>
+    <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=<?php echo $init_id; ?>&ev=PageView&noscript=1" />
+    </noscript>
+    <?php
+}
 
 add_action('wp_ajax_sendWholesale', 'wholesaleSubmit');
 add_action('wp_ajax_nopriv_sendWholesale', 'wholesaleSubmit');
@@ -117,16 +309,37 @@ function wholesaleSubmit() {
 
     $success = false;
 
-    $company = isset( $_POST['company'] ) ? $_POST['company'] : "";
-    $client = isset( $_POST['client'] ) ? $_POST['client'] : "";
+    // contact info
+    $firstName = isset( $_POST['firstName'] ) ? $_POST['firstName'] : "";
+    $lastName = isset( $_POST['lastName'] ) ? $_POST['lastName'] : "";
     $phone = isset( $_POST['phone'] ) ? $_POST['phone'] : "";
     $emailaddress = filter_var($_POST['emailaddress'], FILTER_SANITIZE_EMAIL);
+    // shipping info
+    $company = isset( $_POST['company'] ) ? $_POST['company'] : "";
+    $address = isset( $_POST['address'] ) ? $_POST['address'] : "";
+    $address2 = isset( $_POST['address2'] ) ? $_POST['address2'] : "";
+    $city = isset( $_POST['city'] ) ? $_POST['city'] : "";
+    $state = isset( $_POST['state'] ) ? $_POST['state'] : "";
+    $zip = isset( $_POST['zip'] ) ? $_POST['zip'] : "";
+    // order info
     $service = isset( $_POST['service'] ) ? $_POST['service'] : "";
     $qty = isset( $_POST['qty'] ) ? $_POST['qty'] : "";
-
+    // admin email
     $email = esc_attr(get_option('admin_email'));
 
-    if ( $company && $client && $phone && $emailaddress && $service && $qty ) {
+    if ( 
+        $company 
+        && $firstName 
+        && $lastName 
+        && $phone 
+        && $emailaddress
+        && $address 
+        && $city 
+        && $state 
+        && $zip 
+        && $service 
+        && $qty
+    ) {
 
         $subject = "Smoke Break Wholesale Inquiry";
 
@@ -139,10 +352,11 @@ function wholesaleSubmit() {
 
         $formcontent = '<html><body><center>';
             $formcontent .= '<table rules="all" style="border: 1px solid #cccccc; width: 600px;" cellpadding="10">';
-            $formcontent .= "<tr><td><strong>Company:</strong></td><td>".$company."</td></tr>";
-            $formcontent .= "<tr><td><strong>Name:</strong></td><td>".$client."</td></tr>";
-            $formcontent .= "<tr><td><strong>Phone:</strong></td><td>".$phone."</td></tr>";
+            $formcontent .= "<tr><td><strong>Name:</strong></td><td>".$firstName." ".$lastName."</td></tr>";
             $formcontent .= "<tr><td><strong>Email:</strong></td><td>".$emailaddress."</td></tr>";
+            $formcontent .= "<tr><td><strong>Phone:</strong></td><td>".$phone."</td></tr>";
+            $formcontent .= "<tr><td><strong>Company:</strong></td><td>".$company."</td></tr>";
+            $formcontent .= "<tr><td><strong>Shipping:</strong></td><td>".$address.'<br />'.$address2.'<br />'.$city.','.$state.' '.$zip."</td></tr>";
             $formcontent .= "<tr><td><strong>Service:</strong></td><td>".$service."</td></tr>";
             $formcontent .= "<tr><td><strong>Quantity:</strong></td><td>".$qty."</td></tr>";
         $formcontent .= '</table></center></body></html>';
@@ -159,7 +373,6 @@ function wholesaleSubmit() {
     die();
 
 }
-
 add_action('wp_ajax_sendInfluence', 'influenceSubmit');
 add_action('wp_ajax_nopriv_sendInfluence', 'influenceSubmit');
 function influenceSubmit() {
@@ -177,7 +390,7 @@ function influenceSubmit() {
 
     $email = esc_attr(get_option('admin_email'));
 
-    if ( $handle && $address && $address2 && $city && $state && $zip ) {
+    if ( $handle && $emailaddress && $address && $city && $state && $zip ) {
 
         $subject = "Smoke Break Influencer Inquiry";
 
@@ -191,6 +404,7 @@ function influenceSubmit() {
         $formcontent = '<html><body><center>';
             $formcontent .= '<table rules="all" style="border: 1px solid #cccccc; width: 600px;" cellpadding="10">';
             $formcontent .= "<tr><td><strong>Handle:</strong></td><td>".$handle."</td></tr>";
+            $formcontent .= "<tr><td><strong>Email:</strong></td><td>".$emailaddress."</td></tr>";
             $formcontent .= "<tr><td><strong>Address:</strong></td><td>".$address.'<br />'.$address2.'<br />'.$city.','.$state.' '.$zip."</td></tr>";
         $formcontent .= '</table></center></body></html>';
 

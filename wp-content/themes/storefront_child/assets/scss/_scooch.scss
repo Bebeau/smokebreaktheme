@@ -1,0 +1,143 @@
+/*  Classes  on  outer  slideshow  wrapper:
+    either  NONE  or  'fraction'  or  'fraction'  +  one  of  'fraction1'...'fraction10'.
+        fraction  sets  box-sizing:  border-box,  so  that  padding  on  the  element  is  taken  out  ;
+    either  NONE  or  'center'  or  'right'
+
+*/
+.m-scooch  {
+    position: relative;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    &.m-scooch-apps {
+        margin: 0 -15px;
+    }
+    &.m-left { 
+        text-align: left;
+    }
+    &.m-center {
+        text-align: center;
+    }
+    &.m-fluid {
+        .m-scooch-inner {
+            * {
+                box-sizing: border-box;
+            }
+        }
+    }
+    img  {
+        -ms-interpolation-mode:  bicubic;  
+    }
+    .m-item {
+        width: auto;
+        -webkit-transform: translate(0);
+        transform: translate(0);
+        position: relative;
+    }
+    .m-scooch-inner  {
+        position:  relative;
+        white-space:  nowrap;
+        text-align:  center;
+        /*  Removes  inline-block  gaps  due  to  whitespace  */
+        font-size:  0;
+        /*  Configure  animations  */
+        -webkit-transition-property:  -webkit-transform;
+        -moz-transition-property:  -moz-transform;
+        -ms-transition-property:  -ms-transform;
+        -o-transition-property:  -o-transform;
+        transition-property:  transform;
+        /*  iOS  like  slide  timings  */
+        -webkit-transition-timing-function:  cubic-bezier(0.33,  0.66,  0.66,  1);
+        -moz-transition-timing-function:  cubic-bezier(0.33,  0.66,  0.66,  1);
+        -ms-transition-timing-function:  cubic-bezier(0.33,  0.66,  0.66,  1);
+        -o-transition-timing-function:  cubic-bezier(0.33,  0.66,  0.66,  1);
+        transition-timing-function:  cubic-bezier(0.33,  0.66,  0.66,  1);
+        -webkit-transition-duration:  0.5s;
+        -moz-transition-duration:  0.5s;
+        -ms-transition-duration:  0.5s;
+        -o-transition-duration:  0.5s;
+        transition-duration:  0.5s;
+        * {
+            display:  inline-block;
+            vertical-align:  top;
+            white-space:  normal;
+            /*  We  must  reset  the  font-size  here  */
+            font-size:  16px;
+        }
+    }
+    .arrow {
+        position: absolute;
+        top: 0;
+        width: 75px;
+        height: 100%;
+        color: white;
+        vertical-align: middle;
+        font-weight: bold;
+        z-index: 9999;
+        text-align: center;
+        font-size: 36px;
+        line-height: 300px;
+        &:before {
+            vertical-align: middle;
+        }
+        &.left {
+            left: 0;
+            background: linear-gradient( to left, transparent, rgba(0,0,0,0.5));
+            transition: transform 0.3s ease-in-out;
+        }
+        &.right {
+            right: 0;
+            background: linear-gradient( to right, transparent, rgba(0,0,0,0.5));
+            transition: transform 0.3s ease-in-out;
+        }
+        &:hover {
+            cursor: pointer;
+            &.left {
+                background: linear-gradient( to left, transparent, rgba(0,0,0,0.75));
+                transition: transform 0.3s ease-in-out;
+            }
+            &.right {
+                background: linear-gradient( to right, transparent, rgba(0,0,0,0.75));
+                transition: transform 0.3s ease-in-out;
+            }
+        }
+    }
+}
+.m-center:not(.m-fluid)  >  .m-scooch-inner  {
+    display:  inline-block;
+    margin-right:  -20000px  !important;
+    margin-left:  0  !important; 
+    *  {
+        position:  relative;
+        left:  -20000px;
+        &:first-child  {
+            float:  left;
+            margin-right:  20000px;
+            left:  0;  
+        }
+        &:first-child:last-child  {
+            margin-right:  0;  
+        }
+        &:last-child  {
+            margin-right:  -30000px;  
+        }
+    } 
+}
+
+.m-scooch-controls {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 20px;
+    a {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 5px;
+        background: lightgrey;
+        &.m-active {
+            background: grey;
+        }
+    }
+}

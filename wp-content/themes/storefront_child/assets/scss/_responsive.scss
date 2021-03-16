@@ -1,4 +1,30 @@
-@media (max-width:414px) {
+@media (max-width:768px) {
+	#holidayBanner {
+		height: 400px;
+		transform: translate(0,-30px);
+		.half {
+			width: 100%;
+			&.visual {
+				display: none;
+			}
+			&.deal {
+				padding: 0 25px;
+				margin: 0;
+				div {
+					h2 {
+						font-size: 42pt;
+						line-height: 60px;
+					}
+					h3 {
+						font-size: 26pt;
+						margin-top: 25px;
+					}
+				}
+			}
+		}
+	}
+}
+@media (max-width:768px) {
 	.site-branding {
 		height: 150px;
 	}

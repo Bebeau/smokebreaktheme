@@ -1,13 +1,31 @@
+@import url("https://use.typekit.net/tqe1mgy.css");
+
 $facebook: #3b5998;
 $twitter: #00aced;
 $pinterest: #C92228;
 $instagram: #125688;
+
+html,
+body {
+	font-family: source-sans-pro, sans-serif;
+}
 
 input {
 	&:focus {
 		outline: none;
 	}
 }
+
+.alert {
+	background: darkred;
+	color: white;
+	font-size: 1.4rem;
+	text-align: center;
+	padding: 10px;
+	position: relative;
+	z-index: 9;
+}
+
 .home {
 	.woocommerce-products-header,
 	.page-title {
@@ -92,7 +110,7 @@ input {
 		display: inline-block; 
 		box-sizing: border-box;
 		padding: 25px;
-		&:last-child {
+		&:nth-child(even) {
 			margin: 0 0 0 -4px;
 		}
 	}
@@ -118,15 +136,52 @@ input {
 .listprice {
 	text-align: center;
 	color: #6ba04d;
+	text-decoration: none;
 	.regular {
 		&.sale {
-			color: #ccc;
-			text-decoration: line-through;
+			del {
+				color: #ccc;
+				margin-right: 10px;
+			}
 		}
 	}
-	.sale {
-		color: #6ba04d;
-		margin-left: 10px;
+}
+#holidayBanner {
+	height: 600px;
+	.half {
+		width: 50%;
+		display: inline-block;
+		height: 100%;
+		vertical-align: top;
+		&.deal {
+			margin: 0 0 0 -4px;
+			background: url('assets/img/ogkush/bg-pattern.jpg') repeat scroll center;
+			background-size: 200px;
+			color: white;
+			box-sizing: border-box;
+			padding: 50px;
+			text-align: center;
+			div {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				height: 100%;
+			}
+			h2, h3 {
+				color: white;
+				margin: 0;
+				line-height: normal;
+			}
+			h2 {
+				font-size: 64pt;
+				font-weight: bold;
+				line-height: 90px;
+			}
+			h3 {
+				font-size: 32pt;
+				margin-top: 35px;
+			}
+		}
 	}
 }
 #about {
@@ -152,7 +207,16 @@ input {
 #influencefrm {
 	width: 300px;
 	margin: 50px auto;
+	.half,
+	.third {
+		display: flex;
+		flex-direction: column;
+	}
+	h3 {
+		margin: 20px 0 10px;
+	}
 	.input {
+		width: 100%;
 		margin: 5px 0;
 		label {
 			display: block;
@@ -172,6 +236,10 @@ input {
 			padding: 10px;
 			background: #f2f2f2;
 		}
+		select {
+			height: 60px;
+			padding: 0 10px;
+		}
 	}
 	button {
 		margin: 15px auto 0;
@@ -183,6 +251,29 @@ input {
 		}
 		&.error {
 			background: red;
+		}
+	}
+}
+@media(min-width: 768px) {
+	#wholesalefrm {
+		width: 600px;
+		.half,
+		.third {
+			flex-direction: row;
+		}
+		.half {
+			.input {
+				&:first-child {
+					margin-right: 20px;
+				}
+			}
+		}
+		.third {
+			.input {
+				&:nth-child(2) {
+					margin: 5px 20px;
+				}
+			}
 		}
 	}
 }

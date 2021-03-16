@@ -235,6 +235,10 @@ table.cart tr td.product-remove {
 				&#billing_address_1, &#shipping_address_1 {
 					margin-bottom: 5px;
 				}
+				&[type="checkbox"] {
+					height: auto;
+					line-height: auto;
+				}
 			}
 			textarea {
 				background: white;

@@ -2,8 +2,22 @@
 Theme Name: Smoke Break
 Template: storefront
 */
+@import url("https://use.typekit.net/tqe1mgy.css");
+html,
+body {
+  font-family: source-sans-pro, sans-serif; }
+
 input:focus {
   outline: none; }
+
+.alert {
+  background: darkred;
+  color: white;
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  z-index: 9; }
 
 .home .woocommerce-products-header,
 .home .page-title {
@@ -79,7 +93,7 @@ input:focus {
     display: inline-block;
     box-sizing: border-box;
     padding: 25px; }
-    #pillows a:last-child {
+    #pillows a:nth-child(even) {
       margin: 0 0 0 -4px; }
 
 #itemlisting a {
@@ -97,13 +111,43 @@ input:focus {
 
 .listprice {
   text-align: center;
-  color: #6ba04d; }
-  .listprice .regular.sale {
+  color: #6ba04d;
+  text-decoration: none; }
+  .listprice .regular.sale del {
     color: #ccc;
-    text-decoration: line-through; }
-  .listprice .sale {
-    color: #6ba04d;
-    margin-left: 10px; }
+    margin-right: 10px; }
+
+#holidayBanner {
+  height: 600px; }
+  #holidayBanner .half {
+    width: 50%;
+    display: inline-block;
+    height: 100%;
+    vertical-align: top; }
+    #holidayBanner .half.deal {
+      margin: 0 0 0 -4px;
+      background: url("assets/img/ogkush/bg-pattern.jpg") repeat scroll center;
+      background-size: 200px;
+      color: white;
+      box-sizing: border-box;
+      padding: 50px;
+      text-align: center; }
+      #holidayBanner .half.deal div {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%; }
+      #holidayBanner .half.deal h2, #holidayBanner .half.deal h3 {
+        color: white;
+        margin: 0;
+        line-height: normal; }
+      #holidayBanner .half.deal h2 {
+        font-size: 64pt;
+        font-weight: bold;
+        line-height: 90px; }
+      #holidayBanner .half.deal h3 {
+        font-size: 32pt;
+        margin-top: 35px; }
 
 #about h1 {
   text-align: center; }
@@ -125,8 +169,18 @@ input:focus {
 #influencefrm {
   width: 300px;
   margin: 50px auto; }
+  #wholesalefrm .half,
+  #wholesalefrm .third,
+  #influencefrm .half,
+  #influencefrm .third {
+    display: flex;
+    flex-direction: column; }
+  #wholesalefrm h3,
+  #influencefrm h3 {
+    margin: 20px 0 10px; }
   #wholesalefrm .input,
   #influencefrm .input {
+    width: 100%;
     margin: 5px 0; }
     #wholesalefrm .input label,
     #influencefrm .input label {
@@ -147,6 +201,10 @@ input:focus {
       box-sizing: border-box;
       padding: 10px;
       background: #f2f2f2; }
+    #wholesalefrm .input select,
+    #influencefrm .input select {
+      height: 60px;
+      padding: 0 10px; }
   #wholesalefrm button,
   #influencefrm button {
     margin: 15px auto 0;
@@ -159,6 +217,17 @@ input:focus {
     #wholesalefrm button.error,
     #influencefrm button.error {
       background: red; }
+
+@media (min-width: 768px) {
+  #wholesalefrm {
+    width: 600px; }
+    #wholesalefrm .half,
+    #wholesalefrm .third {
+      flex-direction: row; }
+    #wholesalefrm .half .input:first-child {
+      margin-right: 20px; }
+    #wholesalefrm .third .input:nth-child(2) {
+      margin: 5px 20px; } }
 
 footer {
   text-align: center;
@@ -338,9 +407,9 @@ table.cart tr td.product-remove {
         font-size: 14pt; }
     .woocommerce-checkout #payment div.payment_box .form-row {
       margin-bottom: 0; }
-  .woocommerce-checkout .wrap#singlePage .copy {
+  .woocommerce-checkout #singlePage.wrap .copy {
     width: 100%; }
-  .woocommerce-checkout .wrap#singlePage #sidebar {
+  .woocommerce-checkout #singlePage.wrap #sidebar {
     display: none; }
   .woocommerce-checkout #customer_details {
     width: 40%;
@@ -377,20 +446,23 @@ table.cart tr td.product-remove {
       padding: 5px; }
       .woocommerce-checkout form .form-row input#billing_address_1, .woocommerce-checkout form .form-row input#shipping_address_1 {
         margin-bottom: 5px; }
+      .woocommerce-checkout form .form-row input[type="checkbox"] {
+        height: auto;
+        line-height: auto; }
     .woocommerce-checkout form .form-row textarea {
       background: white; }
-    .woocommerce-checkout form .form-row#billing_address_1_field {
+    .woocommerce-checkout form #billing_address_1_field.form-row {
       margin-top: 10px; }
-    .woocommerce-checkout form .form-row#billing_city_field, .woocommerce-checkout form .form-row#billing_state_field, .woocommerce-checkout form .form-row#billing_postcode_field, .woocommerce-checkout form .form-row#shipping_city_field, .woocommerce-checkout form .form-row#shipping_state_field, .woocommerce-checkout form .form-row#shipping_postcode_field {
+    .woocommerce-checkout form #billing_city_field.form-row, .woocommerce-checkout form #billing_state_field.form-row, .woocommerce-checkout form #billing_postcode_field.form-row, .woocommerce-checkout form #shipping_city_field.form-row, .woocommerce-checkout form #shipping_state_field.form-row, .woocommerce-checkout form #shipping_postcode_field.form-row {
       width: 33%;
       display: inline-block;
       box-sizing: border-box;
       padding: 0 5px 0 0; }
-    .woocommerce-checkout form .form-row#billing_postcode_field, .woocommerce-checkout form .form-row#shipping_postcode_field {
+    .woocommerce-checkout form #billing_postcode_field.form-row, .woocommerce-checkout form #shipping_postcode_field.form-row {
       padding: 0; }
-    .woocommerce-checkout form .form-row#billing_company_field, .woocommerce-checkout form .form-row#shipping_company_field {
+    .woocommerce-checkout form #billing_company_field.form-row, .woocommerce-checkout form #shipping_company_field.form-row {
       display: none; }
-    .woocommerce-checkout form .form-row#billing_country_field, .woocommerce-checkout form .form-row#shipping_country_field {
+    .woocommerce-checkout form #billing_country_field.form-row, .woocommerce-checkout form #shipping_country_field.form-row {
       font-size: 12pt; }
     .woocommerce-checkout form .form-row .select2-container .select2-selection--single,
     .woocommerce-checkout form .form-row .select2-container .select2-selection__rendered {
@@ -440,7 +512,25 @@ table.cart tr td.product-remove {
       margin: 0 0 0 5px;
       font-weight: bold; }
 
-@media (max-width: 414px) {
+@media (max-width: 768px) {
+  #holidayBanner {
+    height: 400px;
+    transform: translate(0, -30px); }
+    #holidayBanner .half {
+      width: 100%; }
+      #holidayBanner .half.visual {
+        display: none; }
+      #holidayBanner .half.deal {
+        padding: 0 25px;
+        margin: 0; }
+        #holidayBanner .half.deal div h2 {
+          font-size: 42pt;
+          line-height: 60px; }
+        #holidayBanner .half.deal div h3 {
+          font-size: 26pt;
+          margin-top: 25px; } }
+
+@media (max-width: 768px) {
   .site-branding {
     height: 150px; }
   .site-header {
@@ -543,7 +633,7 @@ table.cart tr td.product-remove {
     margin: 0; }
   .woocommerce-checkout form {
     margin: 0; }
-    .woocommerce-checkout form .form-row#billing_city_field, .woocommerce-checkout form .form-row#billing_state_field, .woocommerce-checkout form .form-row#billing_postcode_field, .woocommerce-checkout form .form-row#shipping_city_field, .woocommerce-checkout form .form-row#shipping_state_field, .woocommerce-checkout form .form-row#shipping_postcode_field {
+    .woocommerce-checkout form #billing_city_field.form-row, .woocommerce-checkout form #billing_state_field.form-row, .woocommerce-checkout form #billing_postcode_field.form-row, .woocommerce-checkout form #shipping_city_field.form-row, .woocommerce-checkout form #shipping_state_field.form-row, .woocommerce-checkout form #shipping_postcode_field.form-row {
       width: 100%;
       display: block;
       margin: 0;
@@ -565,3 +655,316 @@ table.cart tr td.product-remove {
     margin: 0 auto;
     display: block;
     transform: translate(0, 0); } }
+
+#productBanner {
+  background: url("assets/img/ogkush/banner-bg.jpg") no-repeat scroll center/cover; }
+  #productBanner img {
+    height: auto;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    transform: translate(0, 70px); }
+
+.productWrap {
+  padding-top: 70px; }
+  .productWrap h3, .productWrap h4 {
+    font-size: 2rem; }
+
+.itemInfo {
+  text-align: center; }
+  .itemInfo h1, .itemInfo h3 {
+    margin: 0;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    font-size: 2.2em; }
+  .itemInfo .itemPrice {
+    font-size: 3rem;
+    vertical-align: middle;
+    color: #1D282C;
+    margin-bottom: 20px; }
+    .itemInfo .itemPrice del {
+      font-size: 2rem;
+      vertical-align: middle;
+      color: #C3C3C3; }
+      .itemInfo .itemPrice del .woocommerce-Price-currencySymbol {
+        color: #C3C3C3; }
+    .itemInfo .itemPrice .woocommerce-Price-currencySymbol {
+      font-size: 1rem;
+      vertical-align: middle;
+      color: #6A9F4D; }
+  .itemInfo .itemCart .quantity,
+  .itemInfo .itemCart button {
+    display: inline-block;
+    vertical-align: top; }
+  .itemInfo .itemCart button {
+    line-height: 47px;
+    padding: 0;
+    margin: 0;
+    width: 150px;
+    font-size: 1.2rem;
+    text-transform: lowercase;
+    transform: translate(-5px, 0);
+    background: url("assets/img/ogkush/bg-pattern.jpg") repeat scroll center;
+    background-size: 100px; }
+  .itemInfo img {
+    display: block;
+    margin: 0 auto; }
+  .itemInfo #pillowGuy {
+    width: 300px;
+    height: auto;
+    transform: translate(30px, 0); }
+  .itemInfo .itemCheckout {
+    background: white;
+    border: 10px solid lightgrey;
+    padding: 20px 20px 30px;
+    margin: 0 auto;
+    max-width: 500px; }
+
+#itemDesc {
+  box-sizing: border-box;
+  margin: 50px auto; }
+  #itemDesc h3 {
+    text-align: center; }
+  #itemDesc .images {
+    margin-top: 20px; }
+
+#itemPress {
+  text-align: center; }
+  #itemPress .pressLogo {
+    display: block;
+    opacity: 0.8;
+    transform: scale(0.95);
+    transition: all 0.3s ease-in-out;
+    margin: 0 auto 50px; }
+    #itemPress .pressLogo.nowThisWeed {
+      width: 100px;
+      height: 113px;
+      background: url("assets/img/ogkush/nowweed.jpg") no-repeat scroll center/contain; }
+    #itemPress .pressLogo.theChive {
+      width: 241px;
+      height: 43px;
+      background: url("assets/img/ogkush/chive.jpg") no-repeat scroll center/contain; }
+    #itemPress .pressLogo.leafly {
+      width: 127px;
+      height: 53px;
+      background: url("assets/img/ogkush/leafly.jpg") no-repeat scroll center/contain; }
+    #itemPress .pressLogo.thrillist {
+      margin-bottom: 0;
+      width: 140px;
+      height: 44px;
+      background: url("assets/img/ogkush/thrillist.jpg") no-repeat scroll center/contain; }
+    #itemPress .pressLogo:hover {
+      opacity: 1;
+      transform: scale(1);
+      transition: all 0.3s ease-in-out; }
+
+#itemSpecs {
+  margin: 50px auto; }
+  #itemSpecs h3 {
+    text-align: center; }
+
+.mypillow {
+  background: radial-gradient(#65ACFF, #00428E);
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 300px; }
+  .mypillow #pillowGuy {
+    padding: 50px 20px 0;
+    box-sizing: border-box; }
+
+@media (min-width: 768px) {
+  #productBanner img {
+    width: 600px;
+    transform: translate(0, 100px); }
+  .productWrap {
+    padding-top: 100px; }
+    .productWrap h4 {
+      font-size: 1.4rem; }
+  .itemDesc h3 {
+    text-align: left; }
+  .itemInfo h1, .itemInfo h3 {
+    letter-spacing: 2px;
+    font-size: 2.617924em; }
+  .itemInfo .itemCheckout {
+    padding: 20px 20px 50px;
+    border: 20px solid lightgrey; }
+  #itemPress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px; }
+    #itemPress .pressLogo {
+      width: 50%;
+      margin: 0 auto; }
+      #itemPress .pressLogo.nowThisWeed {
+        width: 100px;
+        height: 113px; }
+      #itemPress .pressLogo.theChive {
+        width: 241px;
+        height: 43px; }
+      #itemPress .pressLogo.leafly {
+        width: 127px;
+        height: 53px; }
+      #itemPress .pressLogo.thrillist {
+        width: 140px;
+        height: 44px; }
+      #itemPress .pressLogo:hover {
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.3s ease-in-out; } }
+
+@media (min-width: 992px) {
+  #itemDesc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    margin: 100px auto; }
+    #itemDesc h3 {
+      text-align: left; }
+    #itemDesc .half {
+      width: 60%; }
+      #itemDesc .half:first-child {
+        width: 40%;
+        padding: 0 50px 0 0; }
+  #itemSpecs {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 900px;
+    margin: 100px auto; }
+    #itemSpecs h3 {
+      text-align: left; }
+    #itemSpecs .half {
+      width: 65%; }
+      #itemSpecs .half:first-child {
+        width: 35%; }
+      #itemSpecs .half:last-child {
+        padding: 0 0 0 50px; }
+        #itemSpecs .half:last-child li {
+          font-size: 1.6rem; }
+  .mypillow #pillowGuy {
+    padding: 50px 20px 0; } }
+
+@media (min-width: 1200px) {
+  #itemSpecs,
+  #itemDesc {
+    width: 1024px; } }
+
+/*  Classes  on  outer  slideshow  wrapper:
+    either  NONE  or  'fraction'  or  'fraction'  +  one  of  'fraction1'...'fraction10'.
+        fraction  sets  box-sizing:  border-box,  so  that  padding  on  the  element  is  taken  out  ;
+    either  NONE  or  'center'  or  'right'
+
+*/
+.m-scooch {
+  position: relative;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased; }
+  .m-scooch.m-scooch-apps {
+    margin: 0 -15px; }
+  .m-scooch.m-left {
+    text-align: left; }
+  .m-scooch.m-center {
+    text-align: center; }
+  .m-scooch.m-fluid .m-scooch-inner * {
+    box-sizing: border-box; }
+  .m-scooch img {
+    -ms-interpolation-mode: bicubic; }
+  .m-scooch .m-item {
+    width: auto;
+    -webkit-transform: translate(0);
+    transform: translate(0);
+    position: relative; }
+  .m-scooch .m-scooch-inner {
+    position: relative;
+    white-space: nowrap;
+    text-align: center;
+    /*  Removes  inline-block  gaps  due  to  whitespace  */
+    font-size: 0;
+    /*  Configure  animations  */
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -ms-transition-property: -ms-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+    /*  iOS  like  slide  timings  */
+    -webkit-transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
+    -moz-transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
+    -ms-transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
+    -o-transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
+    transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1);
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -ms-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s; }
+    .m-scooch .m-scooch-inner * {
+      display: inline-block;
+      vertical-align: top;
+      white-space: normal;
+      /*  We  must  reset  the  font-size  here  */
+      font-size: 16px; }
+  .m-scooch .arrow {
+    position: absolute;
+    top: 0;
+    width: 75px;
+    height: 100%;
+    color: white;
+    vertical-align: middle;
+    font-weight: bold;
+    z-index: 9999;
+    text-align: center;
+    font-size: 36px;
+    line-height: 300px; }
+    .m-scooch .arrow:before {
+      vertical-align: middle; }
+    .m-scooch .arrow.left {
+      left: 0;
+      background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.5));
+      transition: transform 0.3s ease-in-out; }
+    .m-scooch .arrow.right {
+      right: 0;
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5));
+      transition: transform 0.3s ease-in-out; }
+    .m-scooch .arrow:hover {
+      cursor: pointer; }
+      .m-scooch .arrow.left:hover {
+        background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.75));
+        transition: transform 0.3s ease-in-out; }
+      .m-scooch .arrow.right:hover {
+        background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.75));
+        transition: transform 0.3s ease-in-out; }
+
+.m-center:not(.m-fluid) > .m-scooch-inner {
+  display: inline-block;
+  margin-right: -20000px  !important;
+  margin-left: 0  !important; }
+  .m-center:not(.m-fluid) > .m-scooch-inner * {
+    position: relative;
+    left: -20000px; }
+    .m-center:not(.m-fluid) > .m-scooch-inner *:first-child {
+      float: left;
+      margin-right: 20000px;
+      left: 0; }
+    .m-center:not(.m-fluid) > .m-scooch-inner *:first-child:last-child {
+      margin-right: 0; }
+    .m-center:not(.m-fluid) > .m-scooch-inner *:last-child {
+      margin-right: -30000px; }
+
+.m-scooch-controls {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 20px; }
+  .m-scooch-controls a {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 5px;
+    background: lightgrey; }
+    .m-scooch-controls a.m-active {
+      background: grey; }

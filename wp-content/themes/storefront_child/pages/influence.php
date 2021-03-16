@@ -14,7 +14,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         echo '<a href="https://theinitgroup.com" target="_BLANK"><img class="signature" src="'.get_stylesheet_directory_uri().'/assets/img/signature.jpg" alt="" /></a>';
         echo '<form action="" method="POST" id="influencefrm">';
         	echo '<div class="input">';
-	        	echo '<label for="handle">@handle</label>';
+	        	echo '<label for="handle">@handle <span>*</span></label>';
 	        	echo '<input type="text" name="handle" placeholder="@" />';
 	        echo '</div>';
 	        echo '<div class="input">';
@@ -22,7 +22,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	        	echo '<input type="email" name="emailaddress" />';
 	        echo '</div>';
 	        echo '<div class="input">';
-	        	echo '<label for="address">Address</label>';
+	        	echo '<label for="address">Address <span>*</span></label>';
 	        	echo '<input type="text" name="address" />';
 	        echo '</div>';
 	        echo '<div class="input">';
@@ -30,11 +30,11 @@ if (have_posts()) : while (have_posts()) : the_post();
 	        	echo '<input type="text" name="address2" />';
 	        echo '</div>';
 	        echo '<div class="input">';
-	        	echo '<label for="city">City</label>';
+	        	echo '<label for="city">City <span>*</span></label>';
 	        	echo '<input type="text" name="city" />';
 	        echo '</div>';
 	        echo '<div class="input">'; ?>
-	        	<label for="state">State</label>
+	        	<label for="state">State <span>*</span></label>
 	        	<select>
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
@@ -90,7 +90,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 				</select>
 	        <?php echo '</div>';
 	        echo '<div class="input">';
-	        	echo '<label for="zip">Zip</label>';
+	        	echo '<label for="zip">Zip <span>*</span></label>';
 	        	echo '<input type="text" name="zip" />';
 	        echo '</div>';
 	        echo '<button type="submit">Submit</button>';

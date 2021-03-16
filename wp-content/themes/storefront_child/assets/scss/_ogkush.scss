@@ -1,0 +1,259 @@
+$nigger: black;
+
+#productBanner {
+	background: url('assets/img/ogkush/banner-bg.jpg') no-repeat scroll center / cover;
+	img {
+		height: auto;
+		width: 100%;
+		display: block;
+		margin: 0 auto;
+		transform: translate(0,70px);
+	}
+}
+.productWrap {
+	padding-top: 70px;
+	h3,h4 {
+		font-size: 2rem;
+	}
+}
+.itemInfo {
+	text-align: center;
+	h1, h3 {
+		margin: 0;
+		font-weight: lighter;
+		letter-spacing: 1px;
+		font-size: 2.2em;
+	}
+	.itemPrice {
+		font-size: 3rem;
+		vertical-align: middle;
+		color: #1D282C;
+		margin-bottom: 20px;
+		del {
+			font-size: 2rem;
+			vertical-align: middle;
+			color: #C3C3C3;
+			.woocommerce-Price-currencySymbol {
+				color: #C3C3C3;
+			}
+		}
+		.woocommerce-Price-currencySymbol {
+			font-size: 1rem;
+			vertical-align: middle;
+			color: #6A9F4D;
+		}
+	}
+	.itemCart {
+		.quantity,
+		button {
+			display: inline-block;
+			vertical-align: top;
+		}
+		button {
+			line-height: 47px;
+			padding: 0;
+			margin: 0;
+			width: 150px;
+			font-size: 1.2rem;
+			text-transform: lowercase;
+			transform: translate(-5px,0);
+			background: url('assets/img/ogkush/bg-pattern.jpg') repeat scroll center;
+			background-size: 100px;
+		}
+	}
+	img {
+		display: block;
+		margin: 0 auto;
+	}
+	#pillowGuy {
+		width: 300px;
+		height: auto;
+		transform: translate(30px,0);
+	}
+	.itemCheckout {
+		background: white;
+		border: 10px solid lightgrey;
+		padding: 20px 20px 30px;
+		margin: 0 auto;
+		max-width: 500px;
+	}
+}
+
+#itemDesc {
+	box-sizing: border-box;
+	margin: 50px auto;
+	h3 {
+		text-align: center;
+	}
+	.images {
+		margin-top: 20px;
+	}
+}
+
+#itemPress {
+	text-align: center;
+	.pressLogo {
+		display: block;
+		opacity: 0.8;
+		transform: scale(0.95);
+		transition: all 0.3s ease-in-out;
+		margin: 0 auto 50px;
+		&.nowThisWeed {
+			width: 100px;
+			height: 113px;
+			background: url('assets/img/ogkush/nowweed.jpg') no-repeat scroll center / contain;
+		}
+		&.theChive {
+			width: 241px;
+			height: 43px;
+			background: url('assets/img/ogkush/chive.jpg') no-repeat scroll center / contain;
+		}
+		&.leafly {
+			width: 127px;
+			height: 53px;
+			background: url('assets/img/ogkush/leafly.jpg') no-repeat scroll center / contain;
+		}
+		&.thrillist {
+			margin-bottom: 0;
+			width: 140px;
+			height: 44px;
+			background: url('assets/img/ogkush/thrillist.jpg') no-repeat scroll center / contain;
+		}
+		&:hover {
+			opacity: 1;
+			transform: scale(1);
+			transition: all 0.3s ease-in-out;
+		}
+	}
+}
+
+#itemSpecs {
+	margin: 50px auto;
+	h3 {
+		text-align: center;
+	}
+}
+.mypillow {
+	background: radial-gradient(#65ACFF, #00428E);
+	max-width: 500px;
+	margin: 0 auto;
+	border-radius: 300px;
+	#pillowGuy {
+		padding: 50px 20px 0;
+		box-sizing: border-box;
+	}
+}
+
+@media(min-width:768px) {
+	#productBanner {
+		img {
+			width: 600px;
+			transform: translate(0,100px);
+		}
+	}
+	.productWrap {
+		padding-top: 100px;
+		h4 {
+			font-size: 1.4rem;
+		}
+	}
+	.itemDesc {
+		h3 {
+			text-align: left;
+		}
+	}
+	.itemInfo {
+		h1,h3 {
+			letter-spacing: 2px;
+			font-size: 2.617924em;
+		}
+		.itemCheckout {
+			padding: 20px 20px 50px;
+			border: 20px solid lightgrey;
+		}
+	}
+	#itemPress {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 50px;
+		.pressLogo {
+			width: 50%;
+			margin: 0 auto;
+			&.nowThisWeed {
+				width: 100px;
+				height: 113px;
+			}
+			&.theChive {
+				width: 241px;
+				height: 43px;
+			}
+			&.leafly {
+				width: 127px;
+				height: 53px;
+			}
+			&.thrillist {
+				width: 140px;
+				height: 44px;
+			}
+			&:hover {
+				opacity: 1;
+				transform: scale(1);
+				transition: all 0.3s ease-in-out;
+			}
+		}
+	}
+}
+@media(min-width:992px) {
+	#itemDesc {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 800px;
+		margin: 100px auto;
+		h3 {
+			text-align: left;
+		}
+		.half {
+			width: 60%;
+			&:first-child {
+				width: 40%;
+				padding: 0 50px 0 0;
+			}
+		}
+	}
+	#itemSpecs {
+		box-sizing: border-box;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 900px;
+		margin: 100px auto;
+		h3 {
+			text-align: left;
+		}
+		.half {
+			width: 65%;
+			&:first-child {
+				width: 35%;
+			}
+			&:last-child {
+				padding: 0 0 0 50px;
+				li {
+					font-size: 1.6rem;
+				}
+			}
+		}
+	}
+	.mypillow {
+		#pillowGuy {
+			padding: 50px 20px 0;
+		}
+	}
+}
+@media(min-width:1200px) {
+	#itemSpecs,
+	#itemDesc {
+		width: 1024px;
+	}
+}

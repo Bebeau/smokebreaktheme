@@ -6,7 +6,19 @@
 
 get_header();
 
-$args = array(
+?>
+
+<!-- <div id="holidayBanner">
+    <div class="visual half" style="background: url(<?php // echo get_stylesheet_directory_uri()?>/assets/img/mypillow.jpg) no-repeat scroll center / cover;"></div>
+    <div class="deal half">
+        <div>
+            <h2>Happy<br />4/20!</h2>
+            <h3>FREE Shipping on all orders over <strong>$40</strong></h3>
+        </div>
+    </div>
+</div> -->
+
+<?php $args = array(
     'posts_per_page' => -1,
     'tax_query' => array(
         'relation' => 'AND',
@@ -18,7 +30,8 @@ $args = array(
     ),
     'post_type' => 'product',
     'orderby' => 'date',
-    'order' => 'asc'
+    'order' => 'asc',
+    'post__in' => array(3242,444)
 );
 $products = new WP_Query( $args );
 echo '<div id="pillows">';
@@ -29,12 +42,7 @@ while ( $products->have_posts() ) {
             <?php the_post_thumbnail("large"); ?>
             <div class="listprice">
                 <?php 
-                    if($product->get_sale_price()) {
-                        echo '<span class="regular sale">$'.number_format($product->get_regular_price()). '</span>';
-                        echo '<span class="sale">$'.number_format($product->get_sale_price()). '</span>';
-                    } else {
-                        echo '<span class="regular">$'.number_format($product->get_price()). '</span>';
-                    }
+                    echo '<span class="regular sale">'.$product->get_price_html(). '</span>';
                 ?>
             </div>
         </a>
@@ -56,15 +64,10 @@ while ( $products->have_posts() ) {
     $products->the_post();
     ?>
         <a href="<?php the_permalink(); ?>">
-            <?php the_post_thumbnail("medium"); ?>
+            <?php the_post_thumbnail("large"); ?>
             <div class="listprice">
                 <?php 
-                    if($product->get_sale_price()) {
-                        echo '<span class="regular sale">$'.number_format($product->get_regular_price()). '</span>';
-                        echo '<span class="sale">$'.number_format($product->get_sale_price()). '</span>';
-                    } else {
-                        echo '<span class="regular">$'.number_format($product->get_price()). '</span>';
-                    }
+                    echo '<span class="regular sale">'.$product->get_price_html(). '</span>';
                 ?>
             </div>
         </a>
